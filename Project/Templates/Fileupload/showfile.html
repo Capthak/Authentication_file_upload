@@ -1,0 +1,10 @@
+{% extends 'Accounts/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block base %}
+{% for i in file %}
+<img src="{{i.document.url}}">
+{% endfor %}
+<p><a href="{% url 'home' %}" >Return Home</a></p>
+
+{% endblock %}

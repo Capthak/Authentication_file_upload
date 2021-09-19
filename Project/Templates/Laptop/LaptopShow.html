@@ -1,0 +1,50 @@
+{% extends 'Accounts/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block base %}
+{% for i in page_obj %}
+<div class="container">
+<table border="1px">
+    <tr>
+        <th>Specs</th>
+        <th>Image</th>
+        <th>Price</th>
+    </tr>
+    <tr>
+        <td>
+            <b>{{i.modelName}}</b><br>
+            {{i.company}}<br>
+            {{i.ram}}<br>
+            {{i.rom}}<br>
+            {{i.processor}}<br>
+        </td>
+        {% if i.image %}
+        <td><img src="{{i.image.url}}" height="100px" width="200px" ></td>
+        {% else %}
+        <td>No IMage </td>
+        {% endif %}
+        <td>{{i.price}} INR</td>
+    </tr>
+</table>
+</div>
+
+{% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}
+
